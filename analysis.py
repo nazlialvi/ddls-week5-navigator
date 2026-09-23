@@ -55,7 +55,7 @@ findings={
  'cells_with_strong_nkt_and_b_marker':int((strong_nkt&strong_b).sum()),
  'cells_with_strong_nkt_and_myeloid_marker':int((strong_nkt&strong_my).sum()),
  'thresholds_used':{'strong_nkt':'NKG7 >= 10 or CD3E >= 5','strong_b':'MS4A1 >= 10','strong_myeloid':'CD14 >= 5 or LYZ >= 20 or FCGR3A >= 5'},
- 'identity':'NK/T-like, with proliferation-associated signal but no convincing cluster-wide doublet pattern',
+ 'identity':'proliferating cytotoxic NK/T cells, with no convincing cluster-wide doublet pattern',
  'confidence':'moderate-low due to n=10 and housekeeping/cell-cycle dominated markers'
 }
 (OUT/'findings.json').write_text(json.dumps(findings, indent=2))
