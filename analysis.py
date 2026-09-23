@@ -15,7 +15,7 @@ names=adata.uns['rank_genes_groups']['names']
 for c in sorted(cluster.unique(), key=int):
     marker_rows.append({'cluster': c, 'top8_markers': ';'.join(names[c].tolist())})
 marker_table=pd.DataFrame(marker_rows)
-type_map={'0':'CD4 T cells','1':'CD14+ monocytes','2':'NK / CD8 T cells','3':'B cells','4':'FCGR3A+ monocytes','5':'dendritic cells','6':'platelets','7':'proliferating NK/T-like cells'}
+type_map={'0':'CD4 T cells','1':'CD14+ monocytes','2':'NK / CD8 T cells','3':'B cells','4':'FCGR3A+ monocytes','5':'dendritic cells','6':'platelets','7':'proliferating cytotoxic NK/T cells'}
 marker_table['suggested_cell_type']=marker_table['cluster'].astype(str).map(type_map)
 marker_table.to_csv(OUT/'marker_table.csv', index=False)
 

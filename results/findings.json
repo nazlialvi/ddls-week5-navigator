@@ -7,7 +7,7 @@
     "4": "FCGR3A+ monocytes",
     "5": "dendritic cells",
     "6": "platelets",
-    "7": "proliferating NK/T-like cells"
+    "7": "proliferating cytotoxic NK/T cells"
   },
   "corrected_comparison_excluding_cluster_7": {
     "CD3E": [
