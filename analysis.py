@@ -56,7 +56,8 @@ findings={
  'cells_with_strong_nkt_and_myeloid_marker':int((strong_nkt&strong_my).sum()),
  'thresholds_used':{'strong_nkt':'NKG7 >= 10 or CD3E >= 5','strong_b':'MS4A1 >= 10','strong_myeloid':'CD14 >= 5 or LYZ >= 20 or FCGR3A >= 5'},
  'identity':'proliferating cytotoxic NK/T cells, with no convincing cluster-wide doublet pattern',
- 'confidence':'moderate-low due to n=10 and housekeeping/cell-cycle dominated markers'
+ 'evidence':'MKI67 in 70% vs 0.1% of other cells, TOP2A 50% vs 0.1%, cytotoxic NKG7/GZMA enriched; no NK/T + B/myeloid co-expression (not doublets)',
+ 'confidence':'moderate: clear proliferation and cytotoxic signal, but only 10 cells'
 }
 (OUT/'findings.json').write_text(json.dumps(findings, indent=2))
 print(marker_table.to_string(index=False))
