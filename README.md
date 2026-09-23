@@ -63,6 +63,22 @@ node test_run.js
 
 The dataset at `data/pbmc3k.h5ad` is not included in this repository. It comes from the DDLS course portal.
 
+## Run locally with a Python backend
+
+The optional FastAPI backend serves `index.html` at `/` and provides a live `POST /run` endpoint. Run it with:
+
+```bash
+uv run uvicorn app:app --reload --port 8005
+```
+
+or:
+
+```bash
+.venv/bin/python -m uvicorn app:app --reload --port 8005
+```
+
+The live GitHub Pages link is the static version of the navigator. The local backend version loads the dataset and computes `/run` results on the server.
+
 ## Limitations
 
 The clusters are very small (13 and 10 cells). The doublet check only tested NK/T versus B-cell/myeloid co-expression. The identities are based on canonical markers, not experimental validation.
