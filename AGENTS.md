@@ -1,5 +1,16 @@
 # AGENTS.md
 
+**GOAL:** Identify what clusters 6 and 7 actually are, so the owner can decide whether to keep or remove cluster 6 and whether to fund follow-up sequencing for cluster 7.
+
+See `spec.md` for all details.
+
+## MUST-NOTs
+
+- Never remove a cluster based on low gene count alone; check `% mito` and markers first.
+- Never call a cluster novel just because it sits apart on the UMAP.
+- Always check lineage co-expression on the raw counts layer, not `.X`.
+- Never invent thresholds or numbers not in the data.
+
 ## Operating environment
 
 - Use the existing virtual environment in `.venv/`.

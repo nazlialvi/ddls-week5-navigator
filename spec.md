@@ -38,6 +38,8 @@ The cluster sizes are:
 | 6 | 13 | 350 | 1.6% |
 | 7 | 10 | 2,363 | 2.0% |
 
+Here, “Genes per cell” and “Mitochondrial signal” are the cluster-level summary values reported by the owner; the transcript does not specify whether they are medians or means. `pct_mito` is a percentage, not a fraction.
+
 The transcript and file do not establish cell-type identities for the numbered clusters.
 
 ## Evidence that would settle the decision
