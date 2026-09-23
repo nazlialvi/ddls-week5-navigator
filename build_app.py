@@ -7,8 +7,7 @@ import numpy as np
 ad=sc.read_h5ad('data/pbmc3k.h5ad')
 markers=pd.read_csv('results/marker_table.csv')
 findings=json.loads(Path('results/findings.json').read_text())
-type_map={'0':'CD4 T cells','1':'CD14+ monocytes','2':'NK / CD8 T cells','3':'B cells','4':'FCGR3A+ monocytes','5':'dendritic cells','6':'platelets','7':'proliferating NK/T-like cells'}
-findings['suggested_types']=type_map
+type_map=findings['suggested_types']
 Path('results/findings.json').write_text(json.dumps(findings, indent=2))
 obs=ad.obs
 clusters=obs['leiden'].astype(str).tolist()
