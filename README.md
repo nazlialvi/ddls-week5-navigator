@@ -1,49 +1,66 @@
 # PBMC Single-Cell Data Navigator
 
-A browser-based navigator for exploring a processed PBMC single-cell RNA-seq dataset.
+PBMC single-cell data navigator.
+
+**Live app: LINK**
 
 ## The question
 
-The data owner wanted to remove cluster 6 as junk because of its low gene count, and was considering funding follow-up sequencing for cluster 7 because it was small, distinct, and had high counts.
+The owner wanted to remove cluster 6 as junk because of its low gene count and was considering funding follow-up sequencing for cluster 7 because it was small, distinct, and had high counts.
 
 ## The answer
 
-Cluster 6 is **platelets**: its top markers include **PF4, PPBP, GNG11, SDPR, and NRGN**; `PPBP` is expressed in **13/13 cells**, and its median mitochondrial percentage is **1.57%**, the lowest cluster value, so these are not dying cells. Their low RNA signal is expected because platelets have no nucleus. **Keep cluster 6.** Cluster 7 is **proliferating NK/T-like cells**: its top markers are mostly housekeeping and cell-cycle genes; `MKI67` is expressed in **70%** of cells and `NKG7` in **80%**. **0 cells** co-express a strong NK/T marker with a strong B-cell or myeloid marker, so the group does not show the tested doublet signature. This is a known cell state rather than a novel cell type, so **do not fund follow-up sequencing**.
+**Cluster 6 — 13 cells: platelets; keep.** Its top markers include `PF4`, `PPBP`, `GNG11`, `SDPR`, and `NRGN`; these are expressed in approximately 92–100% of cluster 6 cells versus approximately 0.1–2.6% of other cells. Its median mitochondrial percentage is **1.57%**, the lowest of all clusters, so these are not dying cells. The low median gene count (**350**) is expected for platelets, which have no nucleus. The non-platelet signal, including `LYZ` and `CD74`, is low-level ambient RNA.
+
+**Cluster 7 — 10 cells: proliferating cytotoxic NK/T cells; do not fund.** This is a known cell state, not a novel type. Its top-ranked markers are mostly housekeeping and cell-cycle genes; `MKI67` is expressed in **70%** of cluster 7 cells versus **0.1%** of other cells, and `TOP2A` in **50%** versus **0.1%**. Cytotoxic genes including `NKG7`, `GZMA`, and `CST7` are enriched. Its median total counts are **8,508** versus **2,194** for the comparison cells, while its median mitochondrial percentage is normal at **2.03%**. **0 cells** co-express NK/T with B-cell or myeloid markers, so the tested doublet signature is absent. Follow-up sequencing is therefore not funded.
+
+## Cluster summary
+
+| Cluster | Cells | Suggested cell type |
+|---:|---:|---|
+| 0 | 1,197 | CD4 T cells |
+| 1 | 489 | CD14+ monocytes |
+| 2 | 445 | NK / CD8 T cells |
+| 3 | 347 | B cells |
+| 4 | 163 | FCGR3A+ monocytes |
+| 5 | 36 | dendritic cells |
+| 6 | 13 | platelets |
+| 7 | 10 | proliferating NK/T-like cells |
 
 ## What the navigator does
 
-- Displays a UMAP of all cells, coloured by Leiden cluster, QC metric, or curated gene.
-- Provides a summary table for every cluster with cell counts, markers, suggested type, and QC medians.
-- Provides a cluster picker and **Run** button to highlight a cluster and show its markers, QC, and curated-gene expression percentages.
+- Displays the UMAP coloured by cluster, QC metric, or curated gene.
+- Shows a summary table for all clusters.
+- Provides a cluster picker and **Run** button. The selected cluster is highlighted on the UMAP, and the results show its QC values versus other cells plus a gene-enrichment table.
 
 ## How to run
 
-Open `index.html` directly in a browser. No local server is required; Plotly is loaded from a CDN.
+Open `index.html` directly in a browser, or use the live link above.
 
-Live app: LINK
-
-The dataset is not stored in this repository. Obtain `data/pbmc3k.h5ad` from the DDLS course portal.
-
-To rebuild the analysis outputs and app from the dataset:
+To rebuild the project:
 
 ```bash
 python analysis.py
 python build_app.py
 python verify.py
+node test_run.js
 ```
 
-Use the project environment when available:
+With the project environment:
 
 ```bash
 .venv/bin/python analysis.py
 .venv/bin/python build_app.py
 .venv/bin/python verify.py
+node test_run.js
 ```
 
-## Checking the numbers
+The dataset at `data/pbmc3k.h5ad` is not included in this repository. It comes from the DDLS course portal.
 
-`verify.py` reproduces the app's cluster counts, QC medians, marker summaries, and selected expression percentages in plain Python. A bug involving shifted cell-type labels was found by inspecting the app and fixed. `results/findings.json` is now the single source of truth for the suggested cell-type mapping, and the CSV and app use that mapping.
+## How it was checked
+
+`verify.py` and `test_run.js` reproduce the app's numbers in plain Python and Node. By inspecting the app, I found and fixed shifted cell-type labels, an empty UMAP, and a broken Run button. `results/findings.json` is the single source of truth for suggested cell types.
 
 ## AI disclosure
 
-Pi (gpt-5.6-luna via the DDLS portal) wrote the code. Claude was used to help interpret marker genes and guide the workflow. I reviewed the specification and checked the app and numbers myself.
+Pi (gpt-5.6-luna via the DDLS portal) wrote the code. Claude helped interpret marker genes and guide the workflow. I reviewed the specification and checked the app and every number myself.
